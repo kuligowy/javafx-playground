@@ -1,12 +1,10 @@
 package pl.kuligowy.pocspringfx.person;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import io.ebean.EbeanServer;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -20,11 +18,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.kuligowy.pocspringfx.model.person.Person;
 import pl.kuligowy.pocspringfx.model.person.PersonDTO;
-import pl.kuligowy.pocspringfx.model.person.PersonRepository;
 import pl.kuligowy.pocspringfx.person.details.DetailsPresenter;
 import pl.kuligowy.pocspringfx.person.details.DetailsView;
 
-import javax.xml.soap.Detail;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -52,8 +48,6 @@ public class PersonFullTablePresenter implements Initializable {
     private TableColumn<PersonDTO, String> tcSurname;
     @FXML
     private TableColumn<PersonDTO, LocalDate> tcBirthday;
-    @Autowired
-    private PersonRepository repository;
     @FXML
     private Button delete;
     @FXML
@@ -66,11 +60,14 @@ public class PersonFullTablePresenter implements Initializable {
     private DetailsView detailsView;
     private Scene dialogScene;
     private ObservableList<PersonDTO> personList;
+    @Autowired
+    EbeanServer server;
     private static final Logger logger = LoggerFactory.getLogger(PersonFullTablePresenter.class);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        List<PersonDTO> dtos = repository.findAll().stream().map(PersonDTO::new).collect(Collectors.toList());
+        List<Person> list = server.find(Person.class).findList();
+        List<PersonDTO> dtos = list.stream().map(PersonDTO::new).collect(Collectors.toList());
         personList = FXCollections.observableArrayList(dtos);
         logger.debug("Dtos: {}", dtos.size());
         logger.debug("Initialize");
@@ -89,14 +86,14 @@ public class PersonFullTablePresenter implements Initializable {
                 int noOfRemovedItems = c.getRemovedSize();
                 if (noOfRemovedItems == 1) {
                     PersonDTO personDTO = c.getRemoved().get(0);
-                    repository.delete(personDTO.getId());
+                    server.delete(personDTO.toPerson());
                 }
                 c.getRemoved().stream().forEach(obj -> logger.debug("{}", obj));
             }
         });
         delete.setOnAction(event -> deletePerson());
         add.setOnAction(this::addPerson);
-//        edit.setOnAction(this::editPerson);
+        edit.setOnAction(this::editPerson);
         refreshList.setOnAction(this::refresh);
     }
 
@@ -104,8 +101,8 @@ public class PersonFullTablePresenter implements Initializable {
         PersonDTO personDTO = new PersonDTO();
         boolean isOk = showDetailsDialog(personDTO);
         if (isOk) {
-            Person person = repository.save(personDTO.toPerson());
-            personList.add(new PersonDTO(person));
+            server.save(personDTO.toPerson());
+            personList.add(personDTO);
         }
     }
 
@@ -113,7 +110,9 @@ public class PersonFullTablePresenter implements Initializable {
         PersonDTO selectedPerson = tableView.getSelectionModel().getSelectedItem();
         boolean isOk = showDetailsDialog(selectedPerson);
         if (isOk) {
-            repository.save(selectedPerson.toPerson());
+            Person person = selectedPerson.toPerson();
+            logger.debug("Saving person: {}", person);
+            server.save(person);
         }
     }
 
@@ -147,7 +146,9 @@ public class PersonFullTablePresenter implements Initializable {
 
 
     private void refresh(ActionEvent event) {
-        logger.debug("Repo list size {}", repository.findAll().size());
+        List<Person> list = server.find(Person.class).findList();
+        logger.debug("Repo list size {}", list.size());
+        list.forEach(p -> logger.debug("person: {}", p));
     }
 
     private void showDetails(PersonDTO selectedPerson) {

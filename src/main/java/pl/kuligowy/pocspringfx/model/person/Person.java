@@ -1,12 +1,13 @@
 package pl.kuligowy.pocspringfx.model.person;
 
+import io.ebean.Model;
 import pl.kuligowy.pocspringfx.model.job.Job;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-public class Person {
+public class Person extends Model {
 
     @Id
     @GeneratedValue
@@ -17,8 +18,9 @@ public class Person {
     private String lastName;
     @Column(name = "birthday")
     private LocalDate birthday;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "job_id")
+    //    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "job_id")
+    @Transient
     private Job job;
 
     public String getFirstName() {
@@ -59,5 +61,16 @@ public class Person {
 
     public void setJob(Job job) {
         this.job = job;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", birthday=" + birthday +
+                ", job=" + job +
+                '}';
     }
 }

@@ -1,0 +1,4 @@
+entity-packages: pl.kuligowy.pocspringfx.model
+transactional-packages: pl.kuligowy.pocspringfx
+querybean-packages: none
+
