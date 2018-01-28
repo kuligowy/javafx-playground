@@ -100,6 +100,7 @@ public class PersonDTO {
         person.setFirstName(this.getFirstName());
         person.setLastName(this.getLastName());
         person.setBirthday(this.getBirthday());
+        person.setJob(this.getJob());
         return person;
     }
 }

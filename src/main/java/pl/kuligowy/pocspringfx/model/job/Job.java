@@ -1,12 +1,14 @@
 package pl.kuligowy.pocspringfx.model.job;
 
 
+import io.ebean.Model;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Job {
+public class Job extends Model {
 
     @Id
     @GeneratedValue

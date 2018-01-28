@@ -1,5 +1,6 @@
 package pl.kuligowy.pocspringfx.person.details;
 
+import io.ebean.EbeanServer;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.kuligowy.pocspringfx.model.job.Job;
-import pl.kuligowy.pocspringfx.model.job.JobRepository;
 import pl.kuligowy.pocspringfx.model.person.PersonDTO;
 
 import java.net.URL;
@@ -41,14 +41,15 @@ public class DetailsPresenter implements Initializable {
     @FXML
     private Button cancelButton;
     @Autowired
-    JobRepository jobRepository;
+    EbeanServer server;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         logger.debug("Initialize");
         okButton.setOnAction(this::handleOk);
         cancelButton.setOnAction(this::handleCancel);
-        jobCombo.setItems(FXCollections.observableArrayList(jobRepository.findAll()));
+
+        jobCombo.setItems(FXCollections.observableArrayList(server.find(Job.class).findList()));
     }
 
     public void setPerson(PersonDTO person) {
