@@ -3,6 +3,7 @@ package pl.kuligowy.pocspringfx.model.job;
 
 import io.ebean.Model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ public class Job extends Model {
     @Id
     @GeneratedValue
     private Long id;
+    @Column
     private String name;
 
     public Long getId() {

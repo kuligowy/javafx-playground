@@ -86,7 +86,7 @@ public class PersonFullTablePresenter implements Initializable {
                 int noOfRemovedItems = c.getRemovedSize();
                 if (noOfRemovedItems == 1) {
                     PersonDTO personDTO = c.getRemoved().get(0);
-                    server.delete(personDTO.toPerson());
+                    server.delete(personDTO.getPerson());
                 }
                 c.getRemoved().stream().forEach(obj -> logger.debug("{}", obj));
             }
@@ -98,10 +98,10 @@ public class PersonFullTablePresenter implements Initializable {
     }
 
     private void addPerson(ActionEvent event) {
-        PersonDTO personDTO = new PersonDTO();
+        PersonDTO personDTO = new PersonDTO(new Person());
         boolean isOk = showDetailsDialog(personDTO);
         if (isOk) {
-            server.save(personDTO.toPerson());
+            server.save(personDTO.getPerson());
             personList.add(personDTO);
         }
     }
@@ -110,7 +110,7 @@ public class PersonFullTablePresenter implements Initializable {
         PersonDTO selectedPerson = tableView.getSelectionModel().getSelectedItem();
         boolean isOk = showDetailsDialog(selectedPerson);
         if (isOk) {
-            Person person = selectedPerson.toPerson();
+            Person person = selectedPerson.getPerson();
             logger.debug("Saving person: {}", person);
             server.save(person);
         }

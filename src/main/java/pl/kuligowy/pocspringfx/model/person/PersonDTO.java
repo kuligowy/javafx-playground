@@ -16,15 +16,7 @@ public class PersonDTO {
     private StringProperty lastName;
     private ObjectProperty<LocalDate> birthday;
     private ObjectProperty<Job> job;
-
-    public PersonDTO() {
-        this.firstName = new SimpleStringProperty(null);
-        this.lastName = new SimpleStringProperty(null);
-        this.birthday = new SimpleObjectProperty<>(null);
-        this.id = new SimpleObjectProperty<>(null);
-        this.job = new SimpleObjectProperty<>(null);
-
-    }
+    private Person person;
 
     public PersonDTO(Person person) {
         this.firstName = new SimpleStringProperty(person.getFirstName());
@@ -32,6 +24,7 @@ public class PersonDTO {
         this.birthday = new SimpleObjectProperty<>(person.getBirthday());
         this.id = new SimpleObjectProperty<>(person.getId());
         this.job = new SimpleObjectProperty<>(person.getJob());
+        this.person = person;
     }
 
     public Job getJob() {
@@ -94,9 +87,7 @@ public class PersonDTO {
         this.birthday.set(birthday);
     }
 
-    public Person toPerson() {
-        Person person = new Person();
-        person.setId(this.getId());
+    public Person getPerson() {
         person.setFirstName(this.getFirstName());
         person.setLastName(this.getLastName());
         person.setBirthday(this.getBirthday());
