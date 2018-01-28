@@ -1,17 +1,25 @@
 package pl.kuligowy.pocspringfx.model.person;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import pl.kuligowy.pocspringfx.model.job.Job;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 public class Person {
 
     @Id
+    @GeneratedValue
     private Long id;
+    @Column(name = "firstname")
     private String firstName;
+    @Column(name = "lastname")
     private String lastName;
+    @Column(name = "birthday")
     private LocalDate birthday;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "job_id")
+    private Job job;
 
     public String getFirstName() {
         return firstName;
@@ -35,5 +43,21 @@ public class Person {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
+    public Job getJob() {
+        return job;
+    }
+
+    public void setJob(Job job) {
+        this.job = job;
     }
 }

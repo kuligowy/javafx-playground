@@ -6,10 +6,15 @@ import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import pl.kuligowy.pocspringfx.main.MainView;
 
 @SpringBootApplication
+@EntityScan(
+        basePackageClasses = {PocSpringfxApplication.class, Jsr310JpaConverters.class}
+)
 public class PocSpringfxApplication extends Application {
 
     private ConfigurableApplicationContext springContext;
