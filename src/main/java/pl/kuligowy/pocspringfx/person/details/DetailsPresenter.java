@@ -5,11 +5,10 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ import pl.kuligowy.pocspringfx.model.job.Job;
 import pl.kuligowy.pocspringfx.model.person.PersonDTO;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 @Component
@@ -49,7 +49,22 @@ public class DetailsPresenter implements Initializable {
         okButton.setOnAction(this::handleOk);
         cancelButton.setOnAction(this::handleCancel);
 
-        jobCombo.setItems(FXCollections.observableArrayList(server.find(Job.class).findList()));
+        List<Job> jobList = server.find(Job.class).findList();
+        jobCombo.setItems(FXCollections.observableArrayList(jobList));
+        jobCombo.setConverter(new StringConverter<Job>() {
+            @Override
+            public String toString(Job object) {
+                return object.getName();
+            }
+
+            @Override
+            public Job fromString(String string) {
+                return jobList.stream()
+                        .filter(j -> j.getName().equals(string))
+                        .findFirst()
+                        .orElse(null);
+            }
+        });
     }
 
     public void setPerson(PersonDTO person) {

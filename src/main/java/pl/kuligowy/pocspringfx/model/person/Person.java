@@ -18,9 +18,8 @@ public class Person extends Model {
     private String lastName;
     @Column(name = "birthday")
     private LocalDate birthday;
-    //    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "job_id")
-    @Transient
+        @OneToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "job_id")
     private Job job;
 
     public String getFirstName() {
