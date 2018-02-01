@@ -1,4 +1,4 @@
-package pl.kuligowy.pocspringfx.person;
+package pl.kuligowy.pocspringfx.module.nr1.table;
 
 import io.ebean.EbeanServer;
 import javafx.collections.FXCollections;
@@ -6,26 +6,29 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import javafx.fxml.Initializable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import pl.kuligowy.pocspringfx.model.person.Person;
 import pl.kuligowy.pocspringfx.model.person.PersonDTO;
-import pl.kuligowy.pocspringfx.person.details.DetailsPresenter;
-import pl.kuligowy.pocspringfx.person.details.DetailsView;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
+
+import pl.kuligowy.pocspringfx.module.nr1.details.*;
 
 @Component
 public class PersonFullTablePresenter implements Initializable {

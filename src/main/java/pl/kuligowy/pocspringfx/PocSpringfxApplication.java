@@ -1,14 +1,13 @@
 package pl.kuligowy.pocspringfx;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ConfigurableApplicationContext;
-import pl.kuligowy.pocspringfx.main.MainView;
+import pl.kuligowy.pocspringfx.module.empty.EmptyView;
 
 @SpringBootApplication
 public class PocSpringfxApplication extends Application {
@@ -22,11 +21,16 @@ public class PocSpringfxApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        springContext.getBeanFactory().registerSingleton("primaryStage", primaryStage);
         primaryStage.setTitle("Hello World");
-        MainView mainView = springContext.getBean(MainView.class);
-        Scene scene = new Scene(mainView.getView(), 800, 600);
+        EmptyView emptyView = springContext.getBean(EmptyView.class);
+        Scene scene = new Scene(emptyView.getView(), 800, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
+        primaryStage.setOnCloseRequest(e -> {
+            Platform.exit();
+            System.exit(0);
+        });
     }
 
     @Override

@@ -1,4 +1,4 @@
-package pl.kuligowy.pocspringfx.person.details;
+package pl.kuligowy.pocspringfx.module.nr1.details;
 
 import io.ebean.EbeanServer;
 import javafx.collections.FXCollections;
@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

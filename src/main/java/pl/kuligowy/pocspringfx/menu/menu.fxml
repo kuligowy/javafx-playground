@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToolBar?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1"
-            xmlns="http://javafx.com/javafx/2.2" fx:controller="pl.kuligowy.pocspringfx.menu.MenuPresenter">
-    <children>
-        <HBox prefHeight="400.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0"
-              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-            <children>
-                <Label prefHeight="21.0" text="Choose module"/>
-                <Button fx:id="module1" mnemonicParsing="false" text="Module 1"/>
-                <Button fx:id="module2" mnemonicParsing="false" text="Module 2"/>
-                <Button fx:id="module3" mnemonicParsing="false" text="Module 3" textOverrun="ELLIPSIS"
-                        HBox.hgrow="ALWAYS"/>
-            </children>
-        </HBox>
-    </children>
-</AnchorPane>
+<ToolBar prefHeight="40.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.121"
+         xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="pl.kuligowy.pocspringfx.menu.MenuPresenter">
+    <items>
+        <Button fx:id="module1" mnemonicParsing="false" text="MODUL 1"/>
+        <Button fx:id="module2" mnemonicParsing="false" text="MODUL 2"/>
+        <Button fx:id="module3" mnemonicParsing="false" text="MODUL 3"/>
+    </items>
+</ToolBar>

@@ -1,8 +1,8 @@
-package pl.kuligowy.pocspringfx.person.details;
+package pl.kuligowy.pocspringfx.module.nr1.table;
 
 import org.springframework.stereotype.Component;
 import pl.kuligowy.pocspringfx.views.FXMLView;
 
 @Component
-public class DetailsView extends FXMLView {
+public class PersonFullTableView extends FXMLView {
 }

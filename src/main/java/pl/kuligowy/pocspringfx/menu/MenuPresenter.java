@@ -1,20 +1,20 @@
 package pl.kuligowy.pocspringfx.menu;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import pl.kuligowy.pocspringfx.main.MainPresenter;
-import pl.kuligowy.pocspringfx.person.details.DetailsView;
-import pl.kuligowy.pocspringfx.person.wrapper.WrapperPresenter;
-import pl.kuligowy.pocspringfx.person.wrapper.WrapperView;
-import pl.kuligowy.pocspringfx.views.FXMLView;
+import pl.kuligowy.pocspringfx.module.empty.EmptyView;
+import pl.kuligowy.pocspringfx.module.nr1.MainView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,6 +24,12 @@ public class MenuPresenter implements Initializable {
 
     private static final Logger logger = LoggerFactory.getLogger(MenuPresenter.class);
 
+    @Autowired
+    @Qualifier("primaryStage")
+    @Lazy
+    private Stage primaryStage;
+    @Autowired
+    private ApplicationContext context;
     @FXML
     private Button module1;
     @FXML
@@ -31,22 +37,39 @@ public class MenuPresenter implements Initializable {
     @FXML
     private Button module3;
     @Autowired
-    private MainPresenter mainPresenter;
+    private MainView module1View;
     @Autowired
-    private WrapperView wrapperView;
-    @Autowired
-    private DetailsView detailsView;
+    private EmptyView emptyView;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         logger.debug("Initialize");
-        module1.setOnAction(event -> enterModule1(wrapperView));
-        module2.setOnAction(event -> enterModule1(detailsView));
+        module1.setOnAction(event -> enterModule1());
+        module2.setOnAction(event -> enterModule2());
+        primaryStage = (Stage) context.getBean("primaryStage");
+        logger.debug("primary Stage: {}", primaryStage);
     }
 
-    private void enterModule1(FXMLView view) {
-        logger.debug("Switching to vies {]",view);
-        mainPresenter.changeBottomView(view);
+    private void enterModule1() {
+        logger.debug("entering module 1");
+        changeScene(module1View.getView());
     }
 
+    private void enterModule2() {
+        logger.debug("entering module 2");
+        changeScene(emptyView.getView());
+    }
+
+    private void changeScene(Parent page) {
+        logger.debug("Parent: {}",page);
+        Scene scene = primaryStage.getScene();
+        if (scene == null) {
+            scene = new Scene(page, 700, 450);
+            primaryStage.setScene(scene);
+        } else {
+            primaryStage.getScene().setRoot(page);
+        }
+        primaryStage.sizeToScene();
+    }
 }

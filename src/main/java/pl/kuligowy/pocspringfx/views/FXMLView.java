@@ -28,8 +28,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import pl.kuligowy.pocspringfx.menu.MenuPresenter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -50,6 +53,8 @@ import static java.util.concurrent.CompletableFuture.supplyAsync;
  * @author adam-bien.com
  */
 public abstract class FXMLView extends StackPane {
+
+    private static final Logger logger = LoggerFactory.getLogger(FXMLView.class);
 
     @Autowired
     private ApplicationContext context;
@@ -80,7 +85,7 @@ public abstract class FXMLView extends StackPane {
 
     FXMLLoader loadSynchronously(final URL resource, ResourceBundle bundle, final String conventionalName) throws IllegalStateException {
         final FXMLLoader loader = new FXMLLoader(resource, bundle);
-        System.out.println("context: " + context);
+        logger.debug("Getting view: {}",resource);
         loader.setControllerFactory(context::getBean);
         try {
             loader.load();
@@ -104,6 +109,7 @@ public abstract class FXMLView extends StackPane {
      * @return the node loaded by FXMLLoader
      */
     public Parent getView() {
+        logger.debug("getting View");
         this.initializeFXMLLoader();
         Parent parent = fxmlLoader.getRoot();
         addCSSIfAvailable(parent);
