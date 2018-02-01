@@ -27,14 +27,10 @@ public class MainPresenter implements Initializable {
      * Main layout
      */
     @FXML
-    private StackPane toolbar;
-    @FXML
     private StackPane stack;
     /**
      * This View components
      */
-    @Autowired
-    private MenuView menuView;
     @Autowired
     private PersonFullTableView fullTableView;
 
@@ -46,7 +42,7 @@ public class MainPresenter implements Initializable {
         logger.debug("Initalizing");
         //toolbar.getChildren().add(menuView.getView());
         stack.getChildren().add(fullTableView.getView());
-        toolbar.getChildren().add(menuView.getView());
+//        toolbar.getChildren().add(menuView.getView());
         Person p = new Person();
         p.setFirstName("Johny");
         p.setLastName("Cage");

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,59 +8,95 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-
-<SplitPane dividerPositions="0.5" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="pl.kuligowy.pocspringfx.module.nr1.table.PersonFullTablePresenter">
+<SplitPane dividerPositions="0.5" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.kuligowy.pocspringfx.module.nr1.table.PersonFullTablePresenter">
     <items>
-        <TableView fx:id="tableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                   prefHeight="351.0" prefWidth="326.0">
+        <TableView fx:id="tableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="351.0" prefWidth="326.0">
             <columns>
-                <TableColumn fx:id="tcId" prefWidth="75.0" text="Id"/>
-                <TableColumn fx:id="tcName" prefWidth="75.0" text="Name"/>
-                <TableColumn fx:id="tcSurname" prefWidth="75.0" text="Surname"/>
-                <TableColumn fx:id="tcBirthday" prefWidth="75.0" text="Birthday"/>
+                <TableColumn fx:id="tcId" prefWidth="75.0" text="Id" />
+                <TableColumn fx:id="tcName" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="tcSurname" prefWidth="75.0" text="Surname" />
+                <TableColumn fx:id="tcBirthday" prefWidth="75.0" text="Birthday" />
             </columns>
             <columnResizePolicy>
-                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
         <Pane>
             <children>
-                <GridPane prefHeight="100.0" prefWidth="264.0">
+                <HBox alignment="CENTER" prefHeight="33.0" prefWidth="264.0">
                     <children>
-                        <Label text="Name" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                        <Label text="Surname" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                        <Label text="Birthday" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-                        <Label text="Id" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-                        <Label fx:id="lFirstName" text="lFirstName" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                        <Label fx:id="lLastName" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                        <Label fx:id="lBirthday" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                        <Label fx:id="lId" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-                        <Label text="Details:"/>
-                        <Label text="Job" GridPane.rowIndex="5"/>
-                        <Label fx:id="jobPosition" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-                    </children>
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                    </rowConstraints>
-                </GridPane>
-                <HBox layoutY="272.0" prefHeight="79.0" prefWidth="278.0" spacing="20.0">
-                    <children>
-                        <Button fx:id="add" mnemonicParsing="false" text="Add..."/>
-                        <Button fx:id="edit" mnemonicParsing="false" text="Edit..."/>
-                        <Button fx:id="delete" mnemonicParsing="false" text="Delete"/>
-                        <Button fx:id="refreshList" mnemonicParsing="false" text="refresh list"/>
+                        <Button id="buttonAddIcon" fx:id="add" mnemonicParsing="false" prefWidth="100.0" text="Add" />
+                        <Button fx:id="edit" mnemonicParsing="false" prefWidth="100.0" text="Edit" />
+                        <Button fx:id="delete" mnemonicParsing="false" prefWidth="100.0" text="Delete" />
+                        <Button fx:id="refreshList" mnemonicParsing="false" prefWidth="100.0" text="Refresh" />
                     </children>
                 </HBox>
+                <GridPane layoutX="6.0" layoutY="50.0" prefHeight="175.0" prefWidth="264.0">
+                    <children>
+                        <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Label>
+                        <Label text="Surname:" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Label>
+                        <Label text="Birthday:" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Label>
+                        <Label text="Id:" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="lFirstName" text="lFirstName" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                        <Label fx:id="lLastName" text="lLastName" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                        <Label fx:id="lBirthday" text="lBirthday" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                        <Label fx:id="lId" text="lId" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                        <Label text="Details:">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+                        <Label text="Job:" GridPane.rowIndex="5">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="jobPosition" text="jobPosition" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                    </children>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                </GridPane>
             </children>
         </Pane>
     </items>

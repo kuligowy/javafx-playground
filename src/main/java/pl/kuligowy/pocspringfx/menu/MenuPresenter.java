@@ -3,8 +3,11 @@ package pl.kuligowy.pocspringfx.menu;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.Mnemonic;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +16,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import pl.kuligowy.pocspringfx.PocSpringfxApplication;
 import pl.kuligowy.pocspringfx.module.empty.EmptyView;
-import pl.kuligowy.pocspringfx.module.nr1.MainView;
+import pl.kuligowy.pocspringfx.module.nr1.table.PersonFullTableView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,7 +41,7 @@ public class MenuPresenter implements Initializable {
     @FXML
     private Button module3;
     @Autowired
-    private MainView module1View;
+    private PersonFullTableView personTable;
     @Autowired
     private EmptyView emptyView;
 
@@ -49,27 +53,23 @@ public class MenuPresenter implements Initializable {
         module2.setOnAction(event -> enterModule2());
         primaryStage = (Stage) context.getBean("primaryStage");
         logger.debug("primary Stage: {}", primaryStage);
+        KeyCombination keyCombination1 = new KeyCodeCombination(KeyCode.NUMPAD1, KeyCombination.SHIFT_ANY);
+        KeyCombination keyCombination2 = new KeyCodeCombination(KeyCode.NUMPAD2, KeyCombination.SHIFT_ANY);
+        Mnemonic mnemonic1 = new Mnemonic(module1, keyCombination1);
+        Mnemonic mnemonic2 = new Mnemonic(module2, keyCombination2);
     }
 
     private void enterModule1() {
+        changeScene(emptyView.getView());
         logger.debug("entering module 1");
-        changeScene(module1View.getView());
     }
 
     private void enterModule2() {
         logger.debug("entering module 2");
-        changeScene(emptyView.getView());
+        changeScene(personTable.getView());
     }
 
     private void changeScene(Parent page) {
-        logger.debug("Parent: {}",page);
-        Scene scene = primaryStage.getScene();
-        if (scene == null) {
-            scene = new Scene(page, 700, 450);
-            primaryStage.setScene(scene);
-        } else {
-            primaryStage.getScene().setRoot(page);
-        }
-        primaryStage.sizeToScene();
+        PocSpringfxApplication.getRoot().setCenter(page);
     }
 }

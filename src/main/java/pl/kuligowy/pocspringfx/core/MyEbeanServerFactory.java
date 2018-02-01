@@ -1,4 +1,4 @@
-package pl.kuligowy.pocspringfx;
+package pl.kuligowy.pocspringfx.core;
 
 import io.ebean.EbeanServer;
 import io.ebean.EbeanServerFactory;

@@ -1,4 +1,4 @@
-package pl.kuligowy.pocspringfx;
+package pl.kuligowy.pocspringfx.core;
 
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,4 +1,4 @@
-package pl.kuligowy.pocspringfx.views;
+package pl.kuligowy.pocspringfx.core;
 /*
  * #%L
  * afterburner.fx
@@ -32,7 +32,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import pl.kuligowy.pocspringfx.menu.MenuPresenter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,7 +42,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static java.util.ResourceBundle.getBundle;

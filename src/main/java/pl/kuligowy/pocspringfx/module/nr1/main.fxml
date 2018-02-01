@@ -7,7 +7,4 @@
     <center>
         <StackPane fx:id="stack" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
     </center>
-    <top>
-        <StackPane fx:id="toolbar" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
-    </top>
 </BorderPane>

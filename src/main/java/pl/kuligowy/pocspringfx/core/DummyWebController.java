@@ -1,4 +1,4 @@
-package pl.kuligowy.pocspringfx;
+package pl.kuligowy.pocspringfx.core;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
