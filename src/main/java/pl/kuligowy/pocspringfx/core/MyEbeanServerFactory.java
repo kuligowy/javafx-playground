@@ -43,6 +43,7 @@ public class MyEbeanServerFactory implements FactoryBean<EbeanServer> {
 
         // load configuration from ebean.properties
         config.loadFromProperties();
+        config.addPackage("pl.kuligowy.pocspringfx.model");
         config.setDataSource(dataSource);
         config.setDefaultServer(true);
 //    ...
